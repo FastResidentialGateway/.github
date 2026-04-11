@@ -41,3 +41,28 @@ This is an SDN-enabled and open source Residential Gateway system, designed to w
 ││  FastRG Node   │───▶│   FastRG etcd   │◄───┤FastRG Controller││
 ││ (grpc: 50052)  │    │   (etcd:2379)   │    │  gRPC: 50051    ││
 ││PPPoE Client/NAT│    │                 │    │HTTP(s):8080/8443││
+││  DHCP Server   │◄─────────────────────────▶│  REST API: 8443 ││
+│└────────────────┘    └─────────────────┘    │Prometheus: 55688││
+│       ▲                                     └─────────────────┘│
+│       │   IPoE over VLAN, VLAN A for Subscriber 1,             │
+│       ▼   VLAN B for Subscriber 2                              │
+│┌────────────────┐                                              │
+││      OLT       │ ◄────────────────────┐                       │
+│└────────────────┘                      │                       │
+└───────▲────────────────────────────────────────────────────────┘
+        │  PON Network                   │   PON Network 
+        ▼                                ▼
+┌───────────────────┐           ┌───────────────────┐    
+│┌────────────────┐ │           │┌────────────────┐ │
+││      ONT       │ │           ││      ONT       │ │
+│└────────────────┘ │           │└────────────────┘ │
+│        ▲          │           │        ▲          │
+│        │  IPoE    │           │        │  IPoE    │
+│        ▼          │           │        ▼          │
+│┌─────────────────┐│           │┌─────────────────┐│
+││Subscriber Device││           ││Subscriber Device││
+││  (DHCP client)  ││           ││  (DHCP client)  ││
+│└─────────────────┘│           │└─────────────────┘│
+│   Subscriber 1    │           │   Subscriber 2    │
+└───────────────────┘           └───────────────────┘       ...
+```
